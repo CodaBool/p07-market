@@ -45,11 +45,11 @@ export default function Products({ products, productClick }) {
     const product = products.find(product => product._id === id)
     const variant = product.variants.find(variant => !!variant.default)
     const item = { name: variant.name, description: product.description, id: variant._id, price: Number(variant.price), image: product.coverImg, productId: product._id }
-    const cartId = Object.keys(cart).find(cartId => cartId === id)
+    const cartId = Object.keys(cart).find(cartId => cartId === variant._id)
     if (cartId) {
       if (cart[cartId].quantity < MAX_DUP_ITEMS) { // increment
         productClick(variant.name, false)
-        incrementItem(id)
+        incrementItem(variant._id)
       } else { //too many
         productClick(null, true)
       }
