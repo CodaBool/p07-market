@@ -34,21 +34,25 @@ export default function Payment() {
   if (isLoad(session, loading, true)) return <Load />
 
   async function stripeCheckout() {
-    let sessionId = null
-    const stripe = await stripePromise
-    await axios.post('/api/stripe/session', cartDetails)
-      .then(res => {
-        console.log('res', res.data)
-        sessionId = res.data.id
-      })
-      .catch(err => console.log('err', err.response.data.msg))
-      .catch(console.log)
-    if (!sessionId) return
-    const result = await stripe.redirectToCheckout({sessionId})
-    console.log('done', result)
-    if (result.error) {
-      console.error(result.error)
-    }
+
+    // SAMPLE MODE
+    router.push('/checkout/sample-confirmed')
+
+    // let sessionId = null
+    // const stripe = await stripePromise
+    // await axios.post('/api/stripe/session', cartDetails)
+    //   .then(res => {
+    //     console.log('res', res.data)
+    //     sessionId = res.data.id
+    //   })
+    //   .catch(err => console.log('err', err.response.data.msg))
+    //   .catch(console.log)
+    // if (!sessionId) return
+    // const result = await stripe.redirectToCheckout({sessionId})
+    // console.log('done', result)
+    // if (result.error) {
+    //   console.error(result.error)
+    // }
   }
 
   return (
@@ -99,7 +103,9 @@ export default function Payment() {
             <button onClick={stripeCheckout} className="mx-auto w-100 my-5 stripeButton rounded" size="lg">
               <CreditCard style={{color: '#2f4457', marginBottom: '4px'}} size={28}/> Stripe
             </button>
-            <PayPalButton setPayError={setPayError} setShowError={setShowError} />
+            <button onClick={() => router.push('/checkout/sample-confirmed')} className="mx-auto w-100 stripeButton rounded" size="lg">
+              <CreditCard style={{color: '#2f4457', marginBottom: '4px'}} size={28}/> PayPal
+            </button>
           </>
           {/* {error && <p>{error}</p>} */}
           <Row className="mt-4">
@@ -124,21 +130,20 @@ export default function Payment() {
       </Modal>
       <Modal show={showCred} onHide={() => setShowCred(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Welcome to the devlopment environment</Modal.Title>
+          <Modal.Title>Welcome to the Sample Environment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Stripe</h4>
-          <p><strong>Card Numbers</strong>: 4242 4242 4242 4242</p>
-          <p><strong>Expiration</strong>: 424</p>
-          <p><strong>CVC</strong>: 424</p>
+          <h4>Normally this is where payment is transferred</h4>
+          <p>Due to this only being a <strong>sample</strong>, these features are <strong>disabled</strong>.</p>
+          <p>However, there is still more to see!</p>
           <hr/>
           <br/>
-          <h4>PayPal</h4>
-          <p><strong>Email</strong>: sb-odshu6116493@personal.example.com</p>
-          <p><strong>Password</strong>: {"1wK<1V0="}</p>
+          <h4>Don't Worry!</h4>
+          <p>No personal information is required to continue 😎</p>
+          <p>Clicking either the PayPal or Stripe button will <strong>skip</strong> through to the next section</p>
         </Modal.Body>
         <Modal.Footer>
-          <p className="text-muted mx-auto">Please use the sandbox credentials to complete an order</p>
+          <p className="text-muted mx-auto">I used to play piano by ear. Now I use my hands</p>
         </Modal.Footer>
       </Modal>
       <Modal show={showError} onHide={() => setShowError(false)}>

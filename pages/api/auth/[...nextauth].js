@@ -180,7 +180,6 @@ export default (req, res) => {
       maxAge: 30 * 24 * 60 * 60, // 30 days
     },
     // debug: true,
-    baseUrl: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
     secret: process.env.NEXTAUTH_SECRET
   })
 }

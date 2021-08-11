@@ -13,7 +13,7 @@ export default applyMiddleware(async (req, res) => {
       // verify email validation
       const user = await User.findById(session.id)
       console.log('user', user)
-      if (!user.verified) throw 'You must verify your account before writing a review'
+      // if (!user.verified) throw 'You must verify your account before writing a review'
 
       // verify first review written for this product
       const userReviews = await Review.find({ author: session.id })
@@ -22,11 +22,11 @@ export default applyMiddleware(async (req, res) => {
 
       // verify an this product has been ordered
       const userOrders = await Order.find({ user: session.id })
-      const orderExists = userOrders.find(order => {
-        const hasThisProduct = order.items.find(item => item.id_prod === body.productId)
-        if (hasThisProduct) return true
-      })
-      if (!orderExists) throw 'Only customers who have purchased the product can write reviews'
+      // const orderExists = userOrders.find(order => {
+      //   const hasThisProduct = order.items.find(item => item.id_prod === body.productId)
+      //   if (hasThisProduct) return true
+      // })
+      // if (!orderExists) throw 'Only customers who have purchased the product can write reviews'
 
       const review = await Review.create({
         productId: body.productId,

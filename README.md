@@ -83,3 +83,12 @@ add line `"Action": "sqs:*"` to role policy
 - Discord
   - manage: https://discord.com/developers/applications (incognito)
   - allowed in local: Yes
+
+# Domain Change Checklist
+- [ ] Set NEXTAUTH_URL
+- [ ] Set Captcha [admin](https://www.google.com/recaptcha/admin/)
+- [ ] Update Github app [github](https://github.com/settings/applications/1631352)
+- [ ] Update Google app [google](https://console.cloud.google.com/apis/credentials?authuser=1&project=market-mongo-314800)
+- [ ] Update Facebook app [facebook](https://github.com/settings/applications/1631352) in incognito
+- [ ] Update Twitter app [twitter](https://developer.twitter.com/en/portal/projects/1397214706897756161/apps/20974732/keys)
+- [ ] Update Discord app [discord](https://discord.com/developers/applications)

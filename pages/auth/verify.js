@@ -19,13 +19,18 @@ export default function Signup({ status, msg, resend }) {
   const [session, loading] = useSession()
 
   function handleClick() {
-    setReqStatus('sent')
-    axios.post('/api/auth/token')
-      .then(res => {
-        setReqStatus('success')
-        console.log(res.data)
-      })
-      .catch(err => {console.log(err); console.log(err.response.data.msg)})
+
+    // SAMPLE MODE
+    alert('This feature is disabled in sample mode')
+
+    
+    // setReqStatus('sent')
+    // axios.post('/api/auth/token')
+    //   .then(res => {
+    //     setReqStatus('success')
+    //     console.log(res.data)
+    //   })
+    //   .catch(err => {console.log(err); console.log(err.response.data.msg)})
   }
 
   if (status === 'verified') return (
