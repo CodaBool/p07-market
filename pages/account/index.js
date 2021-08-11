@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 import { useRouter } from 'next/router'
-import { useSession, getSession, signIn } from 'coda-auth/client'
+import { useSession, getSession, signIn } from 'next-auth/client'
 import { Load } from '../../components/Load'
 
 // serverside

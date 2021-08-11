@@ -1,5 +1,5 @@
 import applyMiddleware from '../../util'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { Order } from '../../models'
 
 export default applyMiddleware(async (req, res) => {

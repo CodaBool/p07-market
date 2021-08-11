@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 // server
 // import { getAuthenticatedUser } from '../api/user'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 
 export default function cancelled({ data }) {
   const router = useRouter()

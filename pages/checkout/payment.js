@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useSession } from 'coda-auth/client'
+import { useSession } from 'next-auth/client'
 import { PencilFill, Receipt, HandIndexThumb, PlusCircle, CreditCard } from 'react-bootstrap-icons'
 import { useRouter } from 'next/router'
 import { useShoppingCart } from 'use-shopping-cart'

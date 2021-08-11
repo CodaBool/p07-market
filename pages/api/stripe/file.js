@@ -1,5 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SK)
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { Product, Order, User } from '../../../models'
 import applyMiddleware from '../../../util'
 import { IncomingForm } from 'formidable'

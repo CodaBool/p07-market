@@ -1,6 +1,6 @@
 // import { jwtFromReqOrCtx } from '../../util'
 import { connectDB } from '../../util/db'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { User } from '../../models'
 
 const stripe = require('stripe')(process.env.STRIPE_SK)

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Container from 'react-bootstrap/Container'
-import { Provider } from 'coda-auth/client'
+import { Provider } from 'next-auth/client'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import { CartProvider } from 'use-shopping-cart'

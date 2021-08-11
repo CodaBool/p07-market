@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'coda-auth/client'
+import { signIn, useSession } from 'next-auth/client'
 import ReCAPTCHA from "react-google-recaptcha"
 import { Load } from '../../components/Load'
 import Toast from '../../components/UI/Toast'

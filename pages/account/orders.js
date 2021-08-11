@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import { format } from 'timeago.js'
 
 // server
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { connectDB, jparse } from '../../util/db'
 import { Order } from '../../models'
 import Button from 'react-bootstrap/Button'

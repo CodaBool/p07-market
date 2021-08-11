@@ -1,5 +1,5 @@
 // import React, { useState, useEffect, useRef } from 'react'
-// import { useSession, signIn } from 'coda-auth/client'
+// import { useSession, signIn } from 'next-auth/client'
 // import Button from 'react-bootstrap/Button'
 // import Row from 'react-bootstrap/Row'
 // import Accordion from 'react-bootstrap/Accordion'
@@ -243,7 +243,7 @@ import axios from 'axios'
 
 // server
 import { Order } from '../../models'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { connectDB, jparse } from '../../util/db'
 
 export default function confirmed({ order, id }) {

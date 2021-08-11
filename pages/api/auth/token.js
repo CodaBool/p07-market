@@ -1,10 +1,10 @@
 import applyMiddleware from '../../../util'
-// import { getSession } from 'coda-auth/client'
+// import { getSession } from 'next-auth/client'
 import { Token, User } from '../../../models'
 import  { SESClient, SendEmailCommand }  from  "@aws-sdk/client-ses"
 // import sgMail from '@sendgrid/mail'
 import { randString } from '../../../constants'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 
 export default applyMiddleware(async (req, res) => {
   try {

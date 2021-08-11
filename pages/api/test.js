@@ -1,6 +1,6 @@
 import applyMiddleware from '../../util'
 import { Order, Product, User, Account } from '../../models'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { itemsValidation } from '../../constants'
 // import { connectDB } from '../../util/db'
 

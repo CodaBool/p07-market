@@ -1,4 +1,4 @@
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import applyMiddleware from '../../util'
 import { Product } from '../../models'
 

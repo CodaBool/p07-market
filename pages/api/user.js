@@ -1,6 +1,6 @@
 import applyMiddleware from '../../util'
 import { connectDB, jparse } from '../../util/db'
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { User } from '../../models'
 // import { getOrderShipping } from './paypal/order'
 

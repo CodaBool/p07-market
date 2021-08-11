@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { useRouter } from 'next/router'
-import { useSession } from 'coda-auth/client'
+import { useSession } from 'next-auth/client'
 import { Load } from '../../components/Load'
 
 // serverside

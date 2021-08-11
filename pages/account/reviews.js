@@ -10,7 +10,7 @@ import { format } from 'timeago.js'
 import { StarSimple } from '../../components/UI/Stars'
 
 // server
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import { connectDB, jparse } from '../../util/db'
 import { Review } from '../../models'
 import axios from 'axios'

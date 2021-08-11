@@ -1,4 +1,4 @@
-import { getSession } from 'coda-auth/client'
+import { getSession } from 'next-auth/client'
 import sdk from '@paypal/checkout-server-sdk'
 import applyMiddleware from '../../../util'
 // import { castToObjectId } from '../../../util/db'

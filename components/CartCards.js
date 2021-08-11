@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import { X } from 'react-bootstrap-icons'
 import BoxImg from './UI/BoxImg'
 import { genQuanArr, MAX_DUP_ITEMS } from '../constants'
-import { useSession, signIn } from 'coda-auth/client'
+import { useSession, signIn } from 'next-auth/client'
 
 const QuanSelect = React.forwardRef(({ id, value, onSelect }, ref) => (
   <select className="form-control my-3" name={`sel-${id}`} id={id} value={value} ref={ref} onChange={onSelect}>

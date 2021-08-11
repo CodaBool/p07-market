@@ -1,5 +1,5 @@
 import Spinner from 'react-bootstrap/Spinner'
-import { signIn } from 'coda-auth/client'
+import { signIn } from 'next-auth/client'
 
 // conditionally display a small or large loading spinner & message
 // the message will fade in after 2 seconds

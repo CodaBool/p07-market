@@ -1,4 +1,4 @@
-import Adapters from 'coda-auth/adapters'
+import Adapters from 'next-auth/adapters'
 
 export default class User extends Adapters.TypeORM.Models.User.model {
   // You can extend the options in a model but you should not remove the base

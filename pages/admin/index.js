@@ -4,7 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import Stripe from '../../components/Admin/Stripe'
 import Images from '../../components/Admin/Images'
 import Product from '../../components/Admin/Product'
-import { useSession, signIn } from 'coda-auth/client'
+import { useSession, signIn } from 'next-auth/client'
 
 export default function newAdmin() {
   const [session, loading] = useSession()
