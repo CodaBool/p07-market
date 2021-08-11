@@ -1,0 +1,340 @@
+* { 
+  box-sizing:border-box;
+}
+/* Pins footer bottom of the page regardless of page size */
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+/* Override Bootstrap Nav */
+.nav-link, .navbar-brand {
+  cursor: pointer;
+  font-size: 1.5em !important;
+  margin: 0 15px 0 15px;
+}
+
+/* Form */
+.form-label {
+  font-size: 1.3em;
+  margin: 30px 0 12px 0;
+}
+.signup-button {
+  height: 2em;
+  transition: font-size 0.2s;
+  text-decoration: none !important;
+}
+.signup-button:hover {
+  font-size: 1.2em;
+}
+
+.order-card {
+  cursor: pointer;
+}
+.order-card:hover {
+  background-color: rgba(200, 200, 200, 0.1);
+}
+/* Form error messages */
+/* .errMsg {
+  margin: 3px 0 3px 0;
+  color: #b41724;
+}
+.errMsg::before  {
+  display: inline;
+  content: "⚠ ";
+}
+.redBack {
+  background-color: rgba(190, 29, 29, 0.55) !important;
+} */
+
+
+/* ================ */
+/* Other common CSS */
+/* ================ */
+
+@media (max-width: 991px) {
+  .navBox {
+    width:20%;
+  }
+  .navBox-btn {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+@keyframes gradient {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+/*override Bootstrap Accordian Style */
+/* .card-header {
+  font-weight: 500;
+  font-size: 1.4em;
+  cursor: pointer;
+  background: linear-gradient(-45deg, #2a85d450, #527da350, #0d11ee50, #2fe0e050);
+	background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+} */
+.card-header {
+  cursor: pointer;
+  background: linear-gradient(-45deg, #007bff4f, #00c3ff3d, #0026ff3d, #007bff4f);
+	background-size: 500% 500%;
+  animation: gradient 30s ease infinite;
+}
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+@keyframes fadein {
+  0% { opacity: 0; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.fadeIn {
+  opacity: 1;
+  transition: opacity 1s;
+}
+@keyframes fadein {
+  0% { opacity: 0; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* Sway */
+.sway {
+  animation: sway 5s infinite;
+}
+.sway-on-hover:hover {
+  cursor: pointer;
+  animation: sway 1s infinite;
+}
+@keyframes sway { 
+  0% { transform: rotate(0deg); } 
+  50% { transform: rotate(10deg); } 
+  100% { transform: rotate(0deg); } 
+}
+/* Products */
+.variant-selector:hover {
+  cursor: pointer;
+}
+/* X Icon in Chart */
+.x-icon:hover {
+  cursor: pointer;
+  color: rgb(184, 36, 36);
+  filter: drop-shadow(0 0 2px #fd9d99);
+  animation: spin 0.1s linear;
+}
+.spin-on-hover:hover {
+  cursor: pointer;
+  animation: spin 0.1s linear;
+}
+@keyframes spin { 
+  100% { transform:rotate(90deg); } 
+}
+/* Admin page */
+.flip {
+  cursor: pointer;
+  animation: flip 0.5s linear;
+}
+@keyframes flip { 
+  100% { transform:rotate(360deg); } 
+}
+
+.money {
+  color: rgb(177, 39, 4);
+}
+.shine {
+  background: white;
+  background-image: linear-gradient(to right, white 0%, rgb(240, 236, 236) 20%, white 40%, white 100%);
+  background-size: 800px 800px; 
+  animation: linear shine 1s infinite;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+.box img, .box-small img {
+  z-index: 1;
+}
+.toastHolder {
+  z-index: 2;
+}
+
+.stripeButton:hover {
+  background-color: #e8e6e3;
+}
+
+.stripeButton {
+  background-color: #eee;
+  font-weight: 800;
+  color:#009de1;
+  height: 55px;
+  outline: none;
+  border: none;
+  font-size: 1.2em;
+}
+.paypal-skeleton {
+  background-image: linear-gradient(to right, white 0%, rgb(240, 236, 236) 20%, white 40%, white 100%);
+  background-size: 800px 60px; 
+  animation: linear shine 1s infinite;
+  position: absolute;
+  z-index: -1;
+  height: 55px;
+  width: 100%;
+}
+.paypal-container {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 55px;
+}
+
+/* Custom Form */
+.in-group { 
+  position:relative; 
+  margin-bottom:45px;
+  width: 100%;
+}
+.material {
+  width: 100%;
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+.material:focus {
+  outline:none;
+}
+/* Label */
+.in-label {
+  color: #4d4d4d;
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 300ms ease all;
+}
+/* active state */
+.material:focus ~ label, .material:valid ~ label {
+  top: -14px;
+  font-size: 12px;
+  color: #0062cc;
+}
+.material:focus ~ .bar:before {
+  width: 100%;
+}
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.bar:before {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: #0062cc;
+  transition: 300ms ease all;
+  left: 0%;
+}
+
+/* Star Rating */
+.star-small {
+  color: #aaa;
+  font-size: 23px;
+  text-shadow: 0 0 1px black;
+  user-select: none;
+}
+.star {
+  cursor: pointer;
+  color: #aaa;
+  font-size: 40px;
+  transition: .15s color;
+}
+.full-lit-star {
+  color: #ffd300;
+}
+.semi-lit-star {
+  text-shadow: none;
+  color: #ffd50052;
+}
+.star:hover {
+  text-shadow: 0 0 8px #ffd5003b;
+}
+
+/* Admin */
+.hover-effect:hover {
+  filter: drop-shadow(0 0 2px black);
+  opacity: .9;
+  transition: .1s opacity;
+  cursor: pointer;
+}
+
+/* Review Img */
+.review-avatar {
+  /* border-radius: 50%; */
+}
+@keyframes shine {
+  0% { background-position: -800px 0; }
+  100% { background-position: 800px 0; }
+}
+@media (max-width: 576px) { /* Small devices (landscape phones, 576px and DOWN) */ 
+  .display-1, .display-2, .display-3, .display-4 {
+    font-size: 3em;
+  }
+  .box-small, .box-small .shine {
+    height: 326px;
+    width: 326px;
+  }
+  .box, .box .shine {
+    height: 232px;
+    width: 232px;
+  }
+}
+@media (min-width: 576px) { /* Small devices (landscape phones, 576px and UP) */ 
+  .box-small, .box-small .shine {
+    height: 176px;
+    width: 176px;
+  }
+  .box, .box .shine {
+    height: 412px;
+    width: 412px;
+  }
+}
+@media (min-width: 768px) { /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+  .box-small, .box-small .shine {
+    width: 86px;
+    height: 86px;
+  }
+  .box, .box .shine {
+    height: 232px;
+    width: 232px;
+  }
+}
+@media (min-width: 992px) { /* Large devices (desktops, 992px and up) */
+  .box-small, .box-small .shine {
+    height: 146px;
+    width: 146px;
+  }
+  .box, .box .shine {
+    height: 352px;
+    width: 352px;
+  }
+}
+@media (min-width: 1200px) { /* Extra large devices (large desktops, 1200px and up) */
+  .box-small, .box-small .shine {
+    height: 192px;
+    width: 192px;
+  }
+  .box, .box .shine {
+    height: 443px;
+    width: 443px;
+  }
+}
