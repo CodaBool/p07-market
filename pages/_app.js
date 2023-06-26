@@ -37,11 +37,13 @@ export default function app({ Component, pageProps }) {
             <link rel="icon" href="/image/favicon-32x32.gif" />
           </Head>
           <Navigation />
-          <main>
-            <Container>
-              <Component {...pageProps} />
-            </Container>
-          </main>
+          <div id="page-container">
+            <main>
+              <Container>
+                <Component {...pageProps} />
+              </Container>
+            </main>
+          </div>
           <Footer />
         </CartProvider>
       </Provider>
