@@ -1,3 +1,16 @@
+# E-Commerce Site
+> a live preview of this can be seen [here](https://p7.codabool.com)
+
+This has Stripe and Paypal integration.
+
+It uses serverless technology for a fast and economic app.
+
+This was used as a senior project for my bachelor's degree.
+
+# 🖊️ Details
+> you can read more about this project in a [blog post](https://codabool.com/blog/13)
+
+
 # Features
 - integrated with Stripe
 - MongoDB (via Mongoose)
