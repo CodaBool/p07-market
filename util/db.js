@@ -1,16 +1,36 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
+
+const MONGODB_URI = process.env.MONGODB_URI
+
+if (!MONGODB_URI) {
+  throw new Error("Missing process.env.MONGODB_URI")
+}
+
+let cached = global.mongoose
+
+if (!cached) {
+  cached = global.mongoose = {
+    conn: null,
+    promise: null,
+  }
+}
 
 export async function connectDB() {
-  if (mongoose.connection.readyState >= 1) return
-  return mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-      poolSize: 10, // default is 5
-    },
-    () => console.log('connected!')
-  )
+  if (cached.conn) return cached.conn
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        maxPoolSize: 10,
+      })
+      .then(mongooseInstance => {
+        console.log("connected!")
+        return mongooseInstance
+      })
+  }
+
+  cached.conn = await cached.promise
+  return cached.conn
 }
 
 export function isValidObjectId(id) {
@@ -18,7 +38,7 @@ export function isValidObjectId(id) {
 }
 
 export function castToObjectId(string) {
-  return mongoose.Types.ObjectId(string)
+  return new mongoose.Types.ObjectId(string)
 }
 
 // TODO: replace for more security
@@ -27,11 +47,9 @@ export function jparse(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
-export default async (req, res, next) => {
+export default async function db(req, res, next) {
   try {
-    if (!global.mongoose) {
-      global.mongoose == connectDB()
-    }
+    await connectDB()
   } catch (e) {
     console.error(e)
   }

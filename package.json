@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "junk": "node junk.js",
     "export": "next export",
     "start": "next start"
@@ -20,7 +20,7 @@
     "@stripe/stripe-js": "^1.14.0",
     "aws-sdk": "^2.1693.0",
     "axios": "^1.15.2",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.3",
     "bootstrap": "^4.6.0",
     "formidable": "^1.2.2",
     "micro": "^9.3.4",
