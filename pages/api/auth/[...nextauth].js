@@ -78,26 +78,10 @@ export default (req, res) => {
           }
         }
       }),
-      Providers.GitHub({
-        clientId: process.env.NODE_ENV === 'production' ? 'b1dc555d44f6b7d50386' : '667a50a643e6e59c65e3',
-        clientSecret:  process.env.NODE_ENV === 'production' ? process.env.GIT_CLIENT_SECRET : process.env.GITH_LOCAL_SECRET
-      }),
       Providers.Twitter({
-        clientId: '8xYV207SzsGDbh3GGscA8ogGG',
+        clientId: 'uizMNbCuqDL7IlXzO58YaYdXi',
         clientSecret: process.env.TWITTER_CLIENT_SECRET
       }),
-      Providers.Google({
-        clientId: '660235104603-0os64a862203ek3lre73o2sinbr2de58.apps.googleusercontent.com',
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET
-      }),
-      Providers.Discord({
-        clientId: '846746476742311956',
-        clientSecret: process.env.DISCORD_CLIENT_SECRET
-      }),
-      Providers.Facebook({
-        clientId: '188652586473126',
-        clientSecret: process.env.FB_CLIENT_SECRET
-      })
       // https://dev.codattest.com/api/auth/callback/PROVIDER_NAME
     ],
     adapter: Adapters.TypeORM.Adapter(
