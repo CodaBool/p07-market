@@ -1,7 +1,7 @@
-import applyMiddleware from '../../util'
-import { connectDB, jparse } from '../../util/db'
-import { getSession } from 'next-auth/client'
-import { User } from '../../models'
+import applyMiddleware from "../../util"
+import { connectDB, jparse } from "../../util/db"
+import { getSession } from "next-auth/client"
+import { User } from "../../models"
 // import { getOrderShipping } from './paypal/order'
 
 export default applyMiddleware(async (req, res) => {
@@ -9,7 +9,7 @@ export default applyMiddleware(async (req, res) => {
     // const session = await getSession({ req })
     // if (!session) throw 'Unauthorized'
     const { method, body, query } = req
-    if (method === 'POST') {
+    if (method === "POST") {
       // throw 'bad route'
       // const valid = await verify(body.token)
       // if (valid) {
@@ -24,16 +24,21 @@ export default applyMiddleware(async (req, res) => {
       //     .catch(err => error = err)
       // }
       const session = await getSession({ req })
-      console.log('session', session)
+      console.log("session", session)
       const valid = await verify(body.token)
-      console.log('got request with captcha', valid, 'and body', body)
-      if (!valid) throw 'Bad Captcha'
+      console.log("got request with captcha", valid, "and body", body)
+      if (!valid) throw "Bad Captcha"
       // console.log('post with', body)
-      if (!body.email || !body.id) throw 'Missing data'
-      const newUser = await User.create({ email: body.email, provider: body.id, passwordless: true })
-      if (!newUser) throw 'Cannot create'
-      res.status(200).json({created: true})
-    } else if (method === 'GET') { // null if user not found
+      if (!body.email || !body.id) throw "Missing data"
+      const newUser = await User.create({
+        email: body.email,
+        provider: body.id,
+        passwordless: true,
+      })
+      if (!newUser) throw "Cannot create"
+      res.status(200).json({ created: true })
+    } else if (method === "GET") {
+      // null if user not found
       const session = await getSession({ req })
       const user = await User.findOne({ email: query.email })
       if (!user) {
@@ -43,8 +48,8 @@ export default applyMiddleware(async (req, res) => {
       } else {
         res.status(200).json({ exists: true })
       }
-    } else if (method === 'PUT') {
-      console.log('data', body)
+    } else if (method === "PUT") {
+      console.log("data", body)
       // const orderShipping = await getOrderShipping(body.orderID).catch(console.log)
       // console.log('orderShipping', orderShipping)
       // const putData = {
@@ -61,7 +66,7 @@ export default applyMiddleware(async (req, res) => {
       // }
       // const user = await User.findOneAndUpdate(session.id, data, { new: true })
       // res.status(200).json(user)
-      res.status(200).json({msg: 'hi'})
+      res.status(200).json({ msg: "hi" })
       // if (body.data.admin) { // admin is immutable
       //   error = 'Permission denied'
       // } else {
@@ -80,19 +85,22 @@ export default applyMiddleware(async (req, res) => {
       throw `Cannot use ${method} method for this route`
     }
   } catch (err) {
-    if (typeof err === 'string') {
-      res.status(400).json({ msg: '/user: ' + err })
+    if (typeof err === "string") {
+      res.status(400).json({ msg: "/user: " + err })
     } else {
-      res.status(500).json({ msg: '/user: ' + (err.message || err)})
+      res.status(500).json({ msg: "/user: " + (err.message || err) })
     }
   }
 })
 
 async function verify(token) {
   let valid = false
-  await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SK}&response=${token}`, {method: 'POST'})
+  await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SK}&response=${token}`,
+    { method: "POST" },
+  )
     .then(res => res.json())
-    .then(data => valid = data.success === true)
+    .then(data => (valid = data.success === true))
   return valid
 }
 
@@ -107,31 +115,35 @@ export async function getAuthenticatedUser(contextOrReq) {
   try {
     await connectDB()
     let session = null
-    if (contextOrReq.req) { // Nextjs context
+    if (contextOrReq.req) {
+      // Nextjs context
       session = await getSession(contextOrReq)
-    } else { // typical req object
-      session = await getSession({req: contextOrReq})
+    } else {
+      // typical req object
+      session = await getSession({ req: contextOrReq })
     }
-    console.log('in get auth user, session =', session)
-    if (!session) return Promise.reject('/user: No Session')
+    console.log("in get auth user, session =", session)
+    if (!session) return Promise.reject("/user: No Session")
     let user = null
     if (session.id) {
       user = await User.findById(session.id)
     } else {
-      user = await User.findOne({email: session.user.email})
+      user = await User.findOne({ email: session?.user?.email })
     }
     return jparse(user)
   } catch (err) {
-    console.log('/getUser: ', err.message)
+    console.log("/getUser: ", err.message)
     return null
   }
 }
 
-export async function postUser(data) { // always place in try catch
+export async function postUser(data) {
+  // always place in try catch
   return User.create(data)
 }
 
-export async function putUser(email, data) { // always place in try catch
+export async function putUser(email, data) {
+  // always place in try catch
   // new: true => returns the updated document
   return User.findOneAndUpdate({ email }, data, { new: true })
 }

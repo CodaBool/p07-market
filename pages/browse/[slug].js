@@ -1,13 +1,14 @@
-import BrowseNav from '../../components/BrowseNav'
-import Products from '../../components/Products'
+import BrowseNav from "../../components/BrowseNav"
+import Products from "../../components/Products"
 
-// server
-import { PRODUCTS_PER_PAGE, genQuanArr } from '../../constants'
-import { connectDB, jparse } from '../../util/db'
-import { Product } from '../../models'
+import { PRODUCTS_PER_PAGE, genQuanArr } from "../../constants"
+import { connectDB } from "../../util/db"
+import { Product } from "../../models"
 
 export default function BrowsePage({ products, totalPages, slug }) {
-  if (!products) return <h1 className="display-4 m-5">Store Maintenance</h1>
+  if (!products || products.length === 0) {
+    return <h1 className="display-4 m-5">Store Maintenance</h1>
+  }
 
   return (
     <>
@@ -19,39 +20,54 @@ export default function BrowsePage({ products, totalPages, slug }) {
 }
 
 export async function getStaticProps(context) {
-  let totalPages = 1
-  let { slug } = context.params
+  const slugNum = Number(context.params.slug)
 
   await connectDB()
-  const allProducts = await Product.find().catch(console.log)
-  if (!allProducts) return { props: {} }
-  totalPages = Math.ceil(allProducts.length / PRODUCTS_PER_PAGE) || 1
-  // Splits products into small arrays of the max page size
-  let i = 0, j, tempArr, chunk = PRODUCTS_PER_PAGE, splitArr = []
-  for (i = 0 , j = allProducts.length; i < j; i += chunk) {
-    tempArr = allProducts.slice(i, i + chunk)
-    splitArr.push(tempArr)
+
+  const allProducts = await Product.find({})
+    .lean()
+    .catch(err => {
+      console.error("getStaticProps Product.find failed", err)
+      return []
+    })
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(allProducts.length / PRODUCTS_PER_PAGE),
+  )
+
+  const splitArr = []
+  for (let i = 0; i < allProducts.length; i += PRODUCTS_PER_PAGE) {
+    splitArr.push(allProducts.slice(i, i + PRODUCTS_PER_PAGE))
   }
-  const products = splitArr[slug - 1]
-  // if (all.data.length === 0) return { props: {products: null, totalPages, slug } }
-  return { props: {products: jparse(products), totalPages, slug }, revalidate: 1 }
+
+  const rawProducts = splitArr[slugNum - 1] || []
+
+  const products = JSON.parse(JSON.stringify(rawProducts))
+
+  return {
+    props: {
+      products,
+      totalPages,
+      slug: String(context.params.slug),
+    },
+    revalidate: 1,
+  }
 }
 
 export async function getStaticPaths() {
-  let paths = []
-  
   await connectDB()
-  const products = await Product.find().catch(console.log)
 
-  if (products) {
-    const length = Math.ceil(products.length / PRODUCTS_PER_PAGE) || 1
-    paths = genQuanArr(length).map(page => ({
-      params: { slug: String(page) },
-    }))
-  } else {
-    console.log('no products found')
-    return { paths: [ { params: { slug: '1' } } ], fallback: false }
-  }
-  console.log('browse/[slug] paths', paths)
-  return { paths, fallback: false } // { fallback: false } means other routes should 404.
+  const count = await Product.countDocuments({}).catch(err => {
+    console.error("getStaticPaths countDocuments failed", err)
+    return 0
+  })
+
+  const totalPages = Math.max(1, Math.ceil(count / PRODUCTS_PER_PAGE))
+
+  const paths = genQuanArr(totalPages).map(page => ({
+    params: { slug: String(page) },
+  }))
+
+  return { paths, fallback: false }
 }

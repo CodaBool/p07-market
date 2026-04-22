@@ -1,13 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect } from "react"
 // import { signIn } from 'next-auth/dist/client'
-import { useSession, signIn } from 'next-auth/client'
-import { useRouter } from 'next/router'
-import axios from 'axios'
+import { useSession, signIn } from "next-auth/client"
+import { useRouter } from "next/router"
+import axios from "axios"
 
 export default function Index({ time }) {
-
   const router = useRouter()
-  router.push("browse/1")
+
+  useEffect(() => {
+    router.replace("/browse/1")
+  }, [router])
+
   return null
 
   // const [session, loading] = useSession()
