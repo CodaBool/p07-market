@@ -1,34 +1,3 @@
-// FOR INFO
-// {
-//   key: 'Content-Security-Policy-Report-Only',
-//   value: "default-src *; script-src 'self' *.stripe.com *.bootstrapcdn.com *.jquery.com * js.delivr.net; frame-src *.stripe.com; img-src * blob: data:; style-src 'self';", // .replace(/\n/g, '')
-// }
-
-// ATTEMPT 1
-// const ContentSecurityPolicy = `
-//   default-src 'self';
-//   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.stripe.com *.google-analytics.com *.googleapis.com;
-//   child-src *.stripe.com
-//   img-src * blob: data:;
-//   frame-src *.stripe.com;
-//   media-src 'none';
-//   connect-src *;
-//   font-src 'self';
-//   style-src 'self' *;
-// `
-// ATTEMPT 2
-// const ContentSecurityPolicy = `
-//   default-src *;
-//   script-src * 'unsafe-inline' 'unsafe-eval';
-//   child-src *.stripe.com;
-//   img-src * blob: data:;
-//   frame-src *.stripe.com;
-//   media-src *;
-//   connect-src *;
-//   font-src *;
-//   style-src * 'unsafe-inline';
-// `
-// ATTEMPT 3
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.stripe.com *.bootstrapcdn.com *.jquery.com * js.delivr.net;
@@ -45,39 +14,39 @@ const ContentSecurityPolicy = `
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
-    key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin', // strict-origin-when-cross-origin || origin-when-cross-origin
+    key: "Referrer-Policy",
+    value: "origin-when-cross-origin", // strict-origin-when-cross-origin || origin-when-cross-origin
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
   {
-    key: 'X-Frame-Options',
-    value: 'DENY',
+    key: "X-Frame-Options",
+    value: "DENY",
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
   {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
+    key: "X-Content-Type-Options",
+    value: "nosniff",
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
   {
-    key: 'X-DNS-Prefetch-Control',
-    value: 'on',
+    key: "X-DNS-Prefetch-Control",
+    value: "on",
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
   {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload',
+    key: "Strict-Transport-Security",
+    value: "max-age=31536000; includeSubDomains; preload",
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
   {
-    key: 'Permissions-Policy',
-    value: 'fullscreen=(), sync-xhr(), web-share()', // previously had payment=(self),push(slef),notifications(slef),autoplay(slef),xr(slef)
+    key: "Permissions-Policy",
+    value: "fullscreen=(), sync-xhr(), web-share()", // previously had payment=(self),push(slef),notifications(slef),autoplay(slef),xr(slef)
   },
   {
-    key: 'Content-Security-Policy',
-    value: ContentSecurityPolicy.replace(/\n/g, ''),
-  }
-];
+    key: "Content-Security-Policy",
+    value: ContentSecurityPolicy.replace(/\n/g, ""),
+  },
+]
 
 // analyze build packages
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
@@ -85,7 +54,6 @@ const securityHeaders = [
 //   enabled: 'true',
 // })
 // module.exports = withBundleAnalyzer({})
-
 
 // const uselessObj = {
 module.exports = {
@@ -104,7 +72,6 @@ module.exports = {
   future: {
     webpack5: false,
   },
-  target: 'serverless',
   env: {
     NEXT_PUBLIC_NEXTAUTH_URL: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
     NEXT_PUBLIC_STRIPE_PK: process.env.NEXT_PUBLIC_STRIPE_PK,
@@ -131,22 +98,26 @@ module.exports = {
     BUILD_ID: process.env.BUILD_ID,
   },
   images: {
-    domains: ['files.stripe.com', 'd1mh8rnwboj74a.cloudfront.net', 'market-mongo-dev.s3.us-east-1.amazonaws.com'],
+    domains: [
+      "files.stripe.com",
+      "d1mh8rnwboj74a.cloudfront.net",
+      "market-mongo-dev.s3.us-east-1.amazonaws.com",
+    ],
   },
   async headers() {
     return [
       {
-        source: '/',
-        headers: securityHeaders
+        source: "/",
+        headers: securityHeaders,
       },
       {
-        source: '/:path*',
-        headers: securityHeaders
-      }
+        source: "/:path*",
+        headers: securityHeaders,
+      },
     ]
   },
   i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
+    locales: ["en-US"],
+    defaultLocale: "en-US",
   },
-};
+}
